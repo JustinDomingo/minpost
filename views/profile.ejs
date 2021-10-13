@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title><%= user %></title>
+</head>
+<body class="body">
+    <div class="header-container">
+        <strong><div class="title">MiniPost</div></strong>
+    </div>
+    <center>
+        <div class="prof-container">
+            <div>
+                <h1 class="prof-username">@<%= user %></h2>
+            </div>
+            <% if(posts.length) {
+                posts.map((item) => { %>
+                    <div class="prof-post-container">
+                        <a class="a" href='/user/'><h3 class="prof-author"><%= item.author %></h3></a>
+                        <div class="prof-date"><%= item.date.toLocaleString() %></div>
+                        <div class="body-container">
+                            <p class="prof-body"><%= item.body %></p>
+                        </div>
+                    </div>
+                <% }) 
+            } else { %>
+                <div class="none">No posts yet...</div>
+            <% } %>
+        </div>
+    </center> 
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Your Feed</title>
+</head>
+<body class="body">
+    <div class="header-container">
+        <strong><div class="title">MiniPost</div></strong>
+    </div>
+    <div class="search-container">
+        <center>
+            <input placeholder="Search..." class="search invisible">
+            <button class="search-btn invisible"><i class="fas fa-search invisible"></i></button>
+        </center>
+        <button class="menu-btn" id="dropBtn"><i class="fas fa-sort-down" style="font-size: 20px;"></i>
+            <ul id="dropMenu" class="dropdown invisible">
+                <div class="li-cont"><a href='/user/<%- username %>' class="menu-li decor">Profile</a></div>
+                <br>
+                <form action='/logout' method="POST" id="formTwo">
+                    <div class="li-cont"><a id="a" class="menu-li">Log Out</a></div>
+                </form>
+            </ul>
+        </button>
+    </div>
+    <center>
+        <div class="create-container">
+            <div class="posts-title">Create Post</div>
+            <form id="theForm" action='/create' method="POST">
+                <textarea id="theInput" class="post-input" name="text" type="text"></textarea>
+                <button class="submit-btn">POST</button>
+            </form>
+        </div>
+        <div id="postsContainer" class="posts-container">
+            <div class="posts-title">Latest Posts</div>
+            <div id="err"></div>
+            <% message.forEach(function(message) { %>
+                <div class="success-msg"><%= message %></div>
+            <% }) %>
+            <% errors.forEach(function(message) { %>
+                <div class="error-msg"><%= message %></div>
+            <% }) %>
+            <div id="postInput">
+            </div>
+        </div>
+    </center>
+</body>
+</html>

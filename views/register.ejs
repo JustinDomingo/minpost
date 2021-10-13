@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <title>Welcome!</title>
+</head>
+<body class="body">
+    <div class="header-container">
+        <strong><div class="title">MiniPost</div></strong>
+    </div>
+    <center>
+        <div class="register-container">
+            <div class="register-title"><strong>SIGN UP, IT'S FREE!</strong></div>
+            <div class="input-container">
+                <form action="/register" method="POST">
+
+                    <h3 class="flash-message"><%= errors[0] %></h3>
+
+                    <div class="info"><strong>Username</strong></div><input type="text" placeholder="Enter unique username..." class="register-input" name="username">
+
+                    <h3 class="flash-message"><%= errors[1] %></h3>
+
+                    <div class="info"><strong>Email</strong></div><input type="text" placeholder="Enter unique email..." class="register-input" name="email">
+
+                    <h3 class="flash-message"><%= errors[2] %></h3>
+                    
+                    <div class="info"><strong>Password</strong></div><input type="password" placeholder="Enter unique password..." class="register-input" name="password">
+                    <br>
+                    <button class="register-btn">Register</button>
+                </form>
+            </div>
+        </div>
+    </center>
+    <center>
+        <br>
+        <div class="already">Already have an account? <a href='/log-in'>Log in.</a></div>
+    </center>
+</body>
+</html>
