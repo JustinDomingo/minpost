@@ -1,5 +1,4 @@
 const bcrypt = require("bcryptjs")
-const mongodb = require('mongodb')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config()
@@ -12,12 +11,6 @@ const userSchema = new mongoose.Schema({
 })
 
 const ValidUser = mongoose.model("User", userSchema)
-
-const postSchema = new mongoose.Schema({
-    body: String,
-    author: String,
-    date: Date,
-})
 
 // constructor
 let User = function (data) {
@@ -64,7 +57,7 @@ User.prototype.login = function() {
         }
         let user = await ValidUser.findOne({username: this.data.username})
         if (user && bcrypt.compareSync(this.data.password, user.password)) {
-            resolve("Logged in.")
+            resolve("Logged in.") //API just allows for users to login to MiniPost app from another app. Not just using the login feature.
         } else {
             this.errors.push("Invalid Username/Password")
             reject(this.errors)
@@ -92,10 +85,60 @@ User.prototype.register = function() {
     })
 }
 
+User.prototype.apiReg = function() {
+    return new Promise(async (resolve, reject) => {
+        await this.authentication()
+        if (!this.errors.length) {
+            let salt = bcrypt.genSaltSync(10)
+            this.data.password = bcrypt.hashSync(this.data.password, salt)
+            resolve(this.data) //Since API is just used for registration validation, no need to push into database
+        } else {
+            reject(this.errors)
+        }
+    })
+}
+
 User.findPosts = function(username) {
     return new Promise(async (resolve, reject) => {
         let posts = await mongoose.model('Post').find({ author: username })
         resolve(posts)
+    })
+}
+
+User.getUsers = function() {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = await ValidUser.find()
+            users = users.map(function(user) {
+                return {
+                    username: user.username,
+                    email: user.email
+                }
+            })
+            resolve(users)
+        } catch {
+            reject("404")
+        }
+    })
+}
+
+User.getUser = function(username) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let user = await ValidUser.findOne({ username: username })
+            if (user) {
+                let foundUser = {
+                    _id: user._id,
+                    username: user.username,
+                    email: user.email,
+                }
+                resolve(foundUser)
+            } else {
+                reject('404')
+            }
+        } catch {
+            reject("404")
+        }
     })
 }
 
