@@ -29,6 +29,14 @@ GET method
 
 /api/users
 ```
+### Get Single User
+```
+GET method
+
+/api/user/ENTERUSERNAMEHERE
+
+/api/user/ENTERUSERIDHERE
+```
 
 ### Get Posts
 ```
