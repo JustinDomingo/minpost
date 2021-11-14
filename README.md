@@ -16,6 +16,15 @@ MiniPost is a Facebook and Twitter-like social media application that allows reg
 - Edit your posts
 - Delete your posts
 
+## Technologies Used
+- #### Vanilla JavaScript
+- #### Express
+- #### Node
+- #### MongoDB
+- #### EJS
+- #### CSS
+- #### Sessions/Cookies
+
 ## API
 
 ### Base URL
